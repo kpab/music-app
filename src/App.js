@@ -111,78 +111,70 @@ export default function App() {
   };
 
   return (
-    <html lang="ja">
-      <head>
-        <link
-          rel="icon"
-          href="https://img.icons8.com/?size=100&id=mpeojql23sni&format=png&color=000000"
-        />
-      </head>
-      <body>
-        <div className="flex flex-col min-h-screen bg-gray-900 text-white">
-          <main className="flex-1 p-8 mb-20">
-            <header
+    <body>
+      <div className="flex flex-col min-h-screen bg-gray-900 text-white">
+        <main className="flex-1 p-8 mb-20">
+          <header
+            onClick={() => {
+              setKeyword("");
+              setSearchedSongs(null);
+              setPage(1);
+            }}
+            className="flex items-center mb-10 cursor-pointer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              className="mr-2 cursor-pointer"
+              viewBox="0 0 16 16"
               onClick={() => {
                 setKeyword("");
                 setSearchedSongs(null);
                 setPage(1);
               }}
-              className="flex items-center mb-10 cursor-pointer"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                className="mr-2 cursor-pointer"
-                viewBox="0 0 16 16"
-                onClick={() => {
-                  setKeyword("");
-                  setSearchedSongs(null);
-                  setPage(1);
-                }}
-              >
-                <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-.5 4.11v1.8l-2.5.5v5.09c0 .495-.301.883-.662 1.123C7.974 12.866 7.499 13 7 13c-.5 0-.974-.134-1.338-.377-.36-.24-.662-.628-.662-1.123s.301-.883.662-1.123C6.026 10.134 6.501 10 7 10c.356 0 .7.068 1 .196V4.41a1 1 0 0 1 .804-.98l1.5-.3a1 1 0 0 1 1.196.98z" />
-              </svg>
-              <h1 className="text-4xl font-bold">J-Hiphop Music Player</h1>
-            </header>
-            <SearchInput
-              id="search-input"
-              onInputChange={handleInputChange}
-              onSubmit={searchSongs}
-            />
-            <section>
-              <h2 className="text-2xl font-semibold mb-5">
-                {isSearchedResult ? `Search Results` : "Hot Hits"}
-              </h2>
-              <SongList
-                songs={isSearchedResult ? searchedSongs : popularSongs}
-                isLoading={isLoading}
-                onSongSelected={handleSongSelected}
-              />
-              {isSearchedResult && (
-                <Pagenation
-                  onPrev={hasPrev ? moveToPrev : null}
-                  onNext={hasNext ? moveToNext : null}
-                />
-              )}
-            </section>
-          </main>
-          {selectedSong && (
-            <Player
-              song={selectedSong}
-              isPlaying={isPlaying}
-              onButtonClick={toggleSong}
-              isAudioReady={isAudioReady}
-            />
-          )}
-          <audio
-            ref={audioRef}
-            onCanPlayThrough={handleAudioLoaded}
-            onError={(e) => console.error("オーディオの読み込みエラー", e)}
+              <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-.5 4.11v1.8l-2.5.5v5.09c0 .495-.301.883-.662 1.123C7.974 12.866 7.499 13 7 13c-.5 0-.974-.134-1.338-.377-.36-.24-.662-.628-.662-1.123s.301-.883.662-1.123C6.026 10.134 6.501 10 7 10c.356 0 .7.068 1 .196V4.41a1 1 0 0 1 .804-.98l1.5-.3a1 1 0 0 1 1.196.98z" />
+            </svg>
+            <h1 className="text-4xl font-bold">J-Hiphop Music Player</h1>
+          </header>
+          <SearchInput
+            id="search-input"
+            onInputChange={handleInputChange}
+            onSubmit={searchSongs}
           />
-        </div>
-      </body>
-    </html>
+          <section>
+            <h2 className="text-2xl font-semibold mb-5">
+              {isSearchedResult ? `Search Results` : "Hot Hits"}
+            </h2>
+            <SongList
+              songs={isSearchedResult ? searchedSongs : popularSongs}
+              isLoading={isLoading}
+              onSongSelected={handleSongSelected}
+            />
+            {isSearchedResult && (
+              <Pagenation
+                onPrev={hasPrev ? moveToPrev : null}
+                onNext={hasNext ? moveToNext : null}
+              />
+            )}
+          </section>
+        </main>
+        {selectedSong && (
+          <Player
+            song={selectedSong}
+            isPlaying={isPlaying}
+            onButtonClick={toggleSong}
+            isAudioReady={isAudioReady}
+          />
+        )}
+        <audio
+          ref={audioRef}
+          onCanPlayThrough={handleAudioLoaded}
+          onError={(e) => console.error("オーディオの読み込みエラー", e)}
+        />
+      </div>
+    </body>
   );
 }
