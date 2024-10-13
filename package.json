@@ -1,7 +1,6 @@
 {
-  "name": "music-app",
+  "name": "j-hiphop-music-player",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
